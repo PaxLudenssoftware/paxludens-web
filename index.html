@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pax Ludens</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Pax Ludens: The Gulf Reorders. A one-day strategy simulation for the corporate diplomat. Friday, 13 November 2026, University of St.Gallen.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: ACFR house style (blurred picture held behind the page, white Poppins), but set across a 12-column grid so each topic sits side by side and the page stays short. Logos sit straight on the picture in white. */
+:root{
+  --tint:#151515;
+  --ink:#FFFFFF;
+  --soft:rgba(255,255,255,.72);
+  --faint:rgba(255,255,255,.16);
+  --signal:#E3BD33;
+  --f:"Poppins","Helvetica Neue",Arial,sans-serif;
+  --m:max(20px,env(safe-area-inset-left,0px));
+  --mr:max(20px,env(safe-area-inset-right,0px));
+  --gap:clamp(24px,3vw,56px);
+  color-scheme:dark;
+}
+@media (min-width:760px){:root{--m:max(48px,env(safe-area-inset-left,0px));--mr:max(48px,env(safe-area-inset-right,0px))}}
+html[data-tint="green"]{--tint:#0F241D}
+html[data-tint="oxblood"]{--tint:#2A0F12}
+html[data-tint="graphite"]{--tint:#151515}
+html[data-tint="petrol"]{--tint:#0C2A2E}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--tint);color:var(--ink);font-family:var(--f);font-weight:400;font-size:clamp(1rem,.96rem + .18vw,1.0625rem);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:clip}
+p{margin:0}
+a{color:inherit}
+::selection{background:var(--ink);color:var(--tint)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--tint)}
+.bg img{width:100%;height:100%;object-fit:cover;filter:blur(8px);transform:scale(1.06)}
+.bg::after{content:"";position:absolute;inset:0;background:var(--tint);opacity:.72;transition:background-color 500ms ease}
+
+.page{position:relative;z-index:1;padding-left:var(--m);padding-right:var(--mr)}
+.wrap{max-width:1240px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:28px}
+.grid > *{min-width:0}
+
+/* header */
+header{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:32px}
+.logo{display:block;width:clamp(200px,20vw,280px);color:var(--ink);margin-left:-2%}
+.logo svg{display:block;width:100%;height:auto}
+nav{display:flex;gap:26px;font-weight:300;font-size:.95rem}
+nav a{text-decoration:none;opacity:.88;border-bottom:1px solid transparent;transition:border-color 180ms ease,opacity 180ms ease}
+nav a:hover{opacity:1;border-bottom-color:currentColor}
+
+/* opening */
+.open{padding-block:clamp(56px,11vh,120px) clamp(56px,9vh,96px);align-items:end}
+.open h1{grid-column:1 / 9;margin:0;font-weight:600;font-size:clamp(2.1rem,1.2rem + 3.4vw,4.2rem);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.open h1 span{display:block;font-weight:300;font-size:.42em;letter-spacing:-.005em;margin-top:.45em;color:var(--soft)}
+.open .ed{grid-column:8 / 13;display:grid;gap:14px}
+.open .ed h2{margin:0;font-weight:600;font-size:clamp(1.5rem,1.1rem + 1.2vw,2.1rem);line-height:1.15;letter-spacing:-.01em}
+.open .ed .sub{font-weight:400;font-size:1.05rem;line-height:1.45}
+.open .ed .when{font-weight:500;font-size:clamp(1.05rem,.95rem + .4vw,1.3rem);line-height:1.5}
+.open .ed{grid-column:9 / 13}
+.count{color:var(--signal);font-weight:500;font-variant-numeric:tabular-nums}
+.open .strap{grid-column:1 / 13;margin-top:clamp(28px,4vh,48px);font-size:clamp(1.2rem,1rem + .8vw,1.6rem);line-height:1.45;max-width:52rem}
+
+/* sections */
+section{padding-block:clamp(44px,6vh,72px);border-top:1px solid var(--faint)}
+h2.sh{margin:0;font-weight:600;font-size:clamp(1.45rem,1.1rem + 1.2vw,2rem);line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
+h3{margin:0 0 .6em;font-weight:600;font-size:1.15rem;line-height:1.3}
+.lead{font-size:clamp(1.1rem,1rem + .4vw,1.3rem);line-height:1.5}
+.stack{display:grid;gap:.9em}
+.soft{color:var(--soft)}
+.c-head{grid-column:1 / 4}
+.c-head .sh{font-size:clamp(1.35rem,1.05rem + .9vw,1.75rem)}
+.c-body{grid-column:4 / 13}
+.c-half-a{grid-column:1 / 7}
+.c-half-b{grid-column:7 / 13}
+.cols2{columns:2;column-gap:var(--gap)}
+.cols2 > p{margin-bottom:.9em;orphans:3;widows:3}
+.cols2 > p:last-child{margin-bottom:0}
+#gulf .closing{margin-top:1.8em}
+#gulf .note{margin-top:1.1em}
+#edition{row-gap:clamp(40px,5vh,64px)}
+#edition .c-head .sh.minor{font-size:1.3rem}
+
+/* quote row */
+.quote blockquote{grid-column:1 / 9;margin:0;display:grid;gap:12px}
+.quote blockquote p{font-size:clamp(1.4rem,1.05rem + 1.3vw,2.1rem);line-height:1.3;font-style:italic}
+.quote cite{font-style:normal;font-weight:300;color:var(--soft);font-size:.95rem}
+.quote .hosted{grid-column:9 / 13;align-self:end;color:var(--soft);font-size:.95rem;line-height:1.6}
+
+.note{font-size:.82rem;line-height:1.55;color:var(--soft);font-weight:300;margin-top:.4em}
+
+.themes{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px var(--gap)}
+.themes b{display:block;font-weight:600;margin-bottom:4px}
+
+.people{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px var(--gap)}
+.people li{display:grid;gap:2px;align-content:start}
+.people .n{font-weight:500}
+.people .r{color:var(--soft);font-weight:300;font-size:.9rem;line-height:1.5}
+.keynote{display:grid;gap:2px}
+.keynote .n{font-weight:600;font-size:clamp(1.3rem,1.1rem + .7vw,1.7rem);line-height:1.2}
+.names{display:flex;flex-wrap:wrap;gap:2px 26px;font-weight:500}
+.sub-h{font-size:.95rem;font-weight:500;color:var(--soft);margin-bottom:10px}
+
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.mail .addr{font-size:clamp(1.2rem,1rem + .7vw,1.5rem);font-weight:500;user-select:all;overflow-wrap:anywhere}
+.mail button{font:400 .9rem var(--f);color:var(--ink);background:transparent;border:1px solid rgba(255,255,255,.55);padding:7px 15px;cursor:pointer;transition:background-color 180ms ease,color 180ms ease}
+.mail button:hover{background:var(--ink);color:var(--tint)}
+
+/* footer */
+footer{border-top:1px solid var(--faint);padding-block:44px 110px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:28px;align-items:center}
+footer .lbl{grid-column:1 / 4;color:var(--soft);font-size:.95rem}
+.hosts{grid-column:4 / 13;display:flex;flex-wrap:wrap;gap:28px 56px;align-items:center}
+.hosts a{display:flex;align-items:center;gap:14px;color:var(--ink);text-decoration:none;opacity:.92;transition:opacity 180ms ease}
+.hosts a:hover{opacity:1}
+.hosts .acfr svg{width:118px;height:auto;display:block}
+.hosts .hsg svg{width:210px;height:auto;display:block}
+.hosts .hsg svg path:not(.cls-1){fill:currentColor}
+.hosts .hsg span{font-size:.8rem;line-height:1.35;color:var(--soft);max-width:14ch}
+.base{grid-column:1 / 13;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 28px;font-weight:300;font-size:.9rem;color:var(--soft)}
+.base .links{display:flex;flex-wrap:wrap;gap:22px}
+.base a{text-decoration:none;color:var(--ink);opacity:.88}
+.base a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+
+/* colour options (review only) */
+.tints{position:fixed;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;align-items:center;gap:6px;background:#111;padding:8px 10px;box-shadow:0 8px 24px rgba(0,0,0,.35);font:400 12px/1 var(--f);color:#bbb}
+.tints button{width:26px;height:26px;border-radius:50%;border:2px solid transparent;cursor:pointer;flex:none;padding:0}
+.tints button[aria-pressed="true"]{border-color:#fff}
+
+@media (prefers-reduced-motion:no-preference){
+  html.js .rv{opacity:0;transform:translateY(12px);transition:opacity 800ms cubic-bezier(.16,1,.3,1),transform 800ms cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i,0) * 70ms)}
+  html.js .rv.in{opacity:1;transform:none}
+}
+
+@media (max-width:980px){
+  .people{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols2{columns:1}
+}
+@media (max-width:760px){
+  .open h1,.open .ed,.quote blockquote,.quote .hosted,.c-head,.c-body,.c-half-a,.c-half-b,footer .lbl,.hosts{grid-column:1 / -1}
+  .themes,.people{grid-template-columns:1fr}
+  nav{gap:18px}
+  .open{padding-top:40px}
+}
+
+/* ===== typeset pass: larger reading sizes, no light weights on dark, more air ===== */
+body{font-size:clamp(1.0625rem,1rem + .25vw,1.1875rem);line-height:1.72;letter-spacing:.005em}
+p,li{text-wrap:pretty}
+nav{font-weight:400;font-size:1rem}
+section{padding-block:clamp(64px,9vh,112px)}
+.grid{row-gap:36px}
+#edition{row-gap:clamp(48px,6vh,72px)}
+h2.sh{font-size:clamp(1.6rem,1.15rem + 1.5vw,2.4rem);line-height:1.15}
+.c-head .sh{font-size:clamp(1.5rem,1.1rem + 1.1vw,2rem)}
+#edition .c-head .sh.minor{font-size:clamp(1.2rem,1.05rem + .5vw,1.45rem);line-height:1.3;padding-top:.15em}
+.lead{font-size:clamp(1.2rem,1.02rem + .6vw,1.5rem);line-height:1.55}
+.stack{gap:1.1em}
+.cols2{column-gap:clamp(36px,4vw,64px)}
+.cols2 > p{margin-bottom:1.1em}
+.open .strap{font-size:clamp(1.25rem,1.02rem + .9vw,1.75rem);line-height:1.5;max-width:46rem}
+.open .ed .when{font-size:clamp(1.1rem,1rem + .45vw,1.4rem);line-height:1.55}
+.quote blockquote{gap:18px}
+.quote blockquote p{font-size:clamp(1.5rem,1.1rem + 1.5vw,2.4rem);line-height:1.32}
+.quote cite,.quote .hosted{font-weight:400;font-size:1rem;line-height:1.65}
+.note{font-size:.9rem;font-weight:400;line-height:1.6}
+.themes{gap:36px clamp(36px,4vw,64px)}
+.themes b{font-size:1.125rem;margin-bottom:6px}
+.p-h{margin:0 0 16px;font-weight:600;font-size:clamp(1.15rem,1.05rem + .4vw,1.35rem);line-height:1.3;color:var(--ink)}
+.p-intro{color:var(--soft);margin:-8px 0 20px}
+.people{gap:30px clamp(36px,4vw,64px)}
+.people .n{font-weight:600;font-size:1.0625rem}
+.people .r{font-weight:400;font-size:.95rem;line-height:1.55}
+.keynote .n{font-size:clamp(1.4rem,1.15rem + .9vw,1.9rem)}
+.names{gap:6px 32px;font-size:clamp(1.1rem,1rem + .35vw,1.3rem)}
+.mail .addr{font-size:clamp(1.3rem,1.05rem + .9vw,1.75rem)}
+.mail button{font-weight:500}
+footer .lbl,.base{font-weight:400;font-size:.95rem}
+.hosts .hsg span{font-size:.85rem}
+
+@media (min-width:761px){.c-head{grid-column:1 / 5}.c-body{grid-column:5 / 13}}
+.c-head .sh{font-size:clamp(1.45rem,1.05rem + 1vw,1.9rem)}
+@media (max-width:980px){.people{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.people,.themes{grid-template-columns:1fr}section{padding-block:56px}}
+
+/* ===== lighter reading: hero owns the first screen, long passages fold away ===== */
+.open{min-height:calc(88svh - 140px);display:grid;align-content:end;padding-block:clamp(48px,8vh,96px) clamp(64px,10vh,112px)}
+.open h1{grid-column:1 / 11;font-size:clamp(2.4rem,1.2rem + 4.4vw,5.25rem);line-height:1.04;letter-spacing:-.025em;max-width:16ch}
+.open .when{grid-column:1 / 13;font-weight:500;font-size:clamp(1.1rem,1rem + .45vw,1.35rem);margin-top:6px}
+.open .when .sep{color:var(--signal);padding:0 .35em}
+.open .strap{grid-column:1 / 9;margin-top:clamp(20px,3vh,36px);color:var(--soft);font-size:clamp(1.15rem,1rem + .55vw,1.45rem);max-width:40rem}
+.quote{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:22px}
+.quote blockquote{grid-column:1 / 11}
+.quote blockquote p{font-size:clamp(1.6rem,1.1rem + 2vw,2.9rem);line-height:1.25}
+.quote .hosted{grid-column:1 / 9;align-self:start}
+.more{margin-top:.2em}
+.more summary{list-style:none;display:inline-flex;align-items:center;gap:12px;cursor:pointer;font-weight:500;font-size:1rem;padding:10px 0;color:var(--ink);user-select:none}
+.more summary::-webkit-details-marker{display:none}
+.more summary span{border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px;transition:border-color 180ms ease}
+.more summary:hover span{border-bottom-color:var(--ink)}
+.more summary i{position:relative;width:12px;height:12px;flex:none}
+.more summary i::before,.more summary i::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;background:var(--signal);transition:transform 260ms cubic-bezier(.22,1,.36,1)}
+.more summary i::after{transform:rotate(90deg)}
+.more[open] summary i::after{transform:rotate(0)}
+.more-body{padding-top:10px}
+@media (prefers-reduced-motion:no-preference){.more[open] .more-body{animation:moreIn 520ms cubic-bezier(.16,1,.3,1)}}
+@keyframes moreIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.dd{display:grid;gap:clamp(24px,3vh,36px)}
+.dd-h{margin:0;font-weight:600;font-size:clamp(2.1rem,1.1rem + 3.6vw,4.25rem);line-height:1.05;letter-spacing:-.022em;max-width:14ch}
+.dd-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
+.dd-lead{grid-column:1 / 9}
+.dd-more{grid-column:1 / 13;margin-top:8px}
+.dd-more .cols2{margin-top:6px}
+.dd-q{font-size:clamp(1.35rem,1.05rem + 1.2vw,2rem);line-height:1.38;font-weight:500;max-width:44rem;padding-left:20px;border-left:2px solid var(--signal)}
+.themes4{grid-column:1 / 13;list-style:none;margin:clamp(24px,4vh,48px) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px clamp(24px,3vw,44px)}
+.themes4 li{display:grid;gap:8px;align-content:start;font-size:.98rem;line-height:1.62;color:var(--soft);padding-top:18px;border-top:2px solid var(--signal)}
+.themes4 b{color:var(--ink);font-weight:600;font-size:1.1rem;line-height:1.3}
+@media (max-width:1100px){.themes4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  .open{min-height:0}
+  .open h1,.open .strap,.quote blockquote,.quote .hosted,.dd-lead{grid-column:1 / -1}
+  .themes4{grid-template-columns:1fr}
+  .dd-q{padding-left:16px}
+}
+#participate{row-gap:clamp(40px,6vh,64px)}
+#participate .c-head .sh{padding-top:.1em}
+
+/* ===== background: sharp chart on the first screen only, plain colour below ===== */
+.bg{position:absolute;top:0;left:0;right:0;bottom:auto;height:var(--hero-h,100svh);z-index:0;overflow:hidden;background:var(--tint)}
+.bg img{filter:grayscale(1) contrast(1.05);transform:none;object-position:50% 38%;opacity:.95}
+.bg::after{background:var(--tint);opacity:.42}
+.bg::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--tint) 0%,color-mix(in srgb,var(--tint) 78%,transparent) 38%,transparent 78%)}
+.open h1,.open .when,.open .strap{text-shadow:0 1px 18px color-mix(in srgb,var(--tint) 70%,transparent)}
+.open .strap{color:rgba(255,255,255,.86)}
+.quote{border-top:0}
+@media (max-width:760px){.bg::after{opacity:.6}.bg::before{background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--tint) 70%,transparent) 100%)}}
+
+/* ===== one system: every section = heading left, text right ===== */
+.stack{align-content:start}
+#about,#gulf{row-gap:clamp(48px,6vh,72px)}
+.dd-q{margin-top:.6em;font-size:clamp(1.2rem,1.02rem + .6vw,1.5rem);line-height:1.5;font-weight:500;max-width:none;padding-left:20px;border-left:2px solid var(--signal)}
+.more .cols2{margin-top:6px}
+
+/* footer: one sentence with logos */
+.hosts{grid-column:1 / -1;gap:22px 28px;align-items:center}
+.hosts .hl{color:var(--soft);font-size:1rem;white-space:nowrap}
+@media (max-width:760px){.hosts{flex-direction:column;align-items:flex-start;gap:14px}}
+
+/* footer centred */
+.hosts{justify-content:center;text-align:center}
+.base{justify-content:center;text-align:center;column-gap:40px}
+.base .links{justify-content:center}
+@media (max-width:760px){.hosts{align-items:center}.base{flex-direction:column;align-items:center}}
+nav a{text-shadow:0 0 10px var(--tint),0 0 2px var(--tint)}
+
+/* ===== footer v3: two partner blocks, labels above logos ===== */
+.hosts{grid-column:1 / -1;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:32px clamp(40px,6vw,88px);text-align:left}
+.host{display:grid;gap:14px;justify-items:start}
+.host .hl{color:var(--soft);font-size:.9rem;white-space:nowrap}
+.hosts a{opacity:.95}
+.hosts .acfr svg{width:clamp(230px,22vw,300px);height:auto;display:block}
+.hsg-lock{display:grid;width:clamp(200px,19vw,250px)}
+.hosts .hsg svg{width:100%;height:auto;display:block}
+.ccmu{display:block;margin-left:22.2%;margin-top:6px;font-size:clamp(.72rem,.68rem + .15vw,.82rem);line-height:1.3;color:var(--ink);opacity:.9;letter-spacing:.005em}
+.hsep{width:1px;align-self:stretch;background:var(--faint)}
+.mail .addr{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;text-decoration-color:rgba(255,255,255,.4);transition:text-decoration-color 180ms ease}
+.mail .addr:hover{text-decoration-color:var(--ink)}
+@media (max-width:760px){.hosts{flex-direction:column;align-items:center;gap:28px}.host{justify-items:center}.hsep{display:none}.hosts .acfr svg{width:240px}.hsg-lock{width:220px}}
+
+.hosts a.hsg,.hosts a.acfr{display:block}
+.hosts .hsg .hsg-lock{display:grid;max-width:none;width:clamp(230px,21vw,280px)}
+.hosts .hsg .ccmu{max-width:none;white-space:nowrap;font-size:clamp(.78rem,.72rem + .2vw,.9rem);color:var(--ink);line-height:1.3}
+@media (max-width:760px){.hosts .hsg .hsg-lock{width:240px}}
+footer .base{margin-top:clamp(16px,2vw,28px)}
+
+/* footer: same baseline for labels, logos centred in equal boxes */
+.hosts{align-items:stretch}
+.host{grid-template-rows:auto 1fr;align-content:start}
+.hosts .host > a{display:flex !important;align-items:center;min-height:clamp(84px,7vw,104px)}
+.hosts .ccmu-logo{display:block;width:clamp(260px,24vw,330px);height:auto}
+@media (max-width:760px){.hosts .ccmu-logo{width:270px}}
+.mailbtn{display:inline-flex;align-items:center;font:500 .95rem var(--f);color:var(--tint);background:var(--ink);text-decoration:none;padding:10px 18px;transition:opacity 180ms ease,transform 140ms ease}
+.mailbtn:hover{opacity:.88}.mailbtn:active{transform:scale(.97)}
+
+/* header: Council logo | Pax Ludens logo */
+.brand{display:flex;align-items:center;gap:clamp(16px,2vw,28px)}
+.acfr-top{display:block;color:var(--ink);width:clamp(84px,8vw,112px);flex:none}
+.acfr-top svg{display:block;width:100%;height:auto}
+.bsep{width:1px;align-self:stretch;min-height:56px;background:rgba(255,255,255,.35)}
+.brand .logo{margin-left:0}
+@media (max-width:600px){.acfr-top{width:70px}.brand .logo{width:150px}.brand{gap:14px}}
+.acfr-top{width:clamp(150px,14vw,196px)}
+@media (max-width:600px){.acfr-top{width:104px}.brand .logo{width:150px}}
+.orbis-link{color:inherit;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}.orbis-link:hover{opacity:.7}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+
+</head>
+<body>
+<div class="bg" aria-hidden="true"><img src="gulf-chart.jpg" alt=""></div>
+
+<div class="page">
+<div class="wrap">
+  <header>
+    <div class="brand"><a class="acfr-top" href="https://www.acfr.org.au/" target="_blank" rel="noopener" aria-label="Australian Council on Foreign Relations"><svg fill="currentColor" aria-hidden="true" focusable="false"  xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="152 168 830 513">
+  
+  <g>
+    <g>
+      <path d="M158.8,258l38.2-83.8c.4-.8,1.5-1.4,2.2-1.4h1.3c.6,0,1.8.6,2.2,1.4l38,83.8c.8,1.6-.3,3.2-2.2,3.2h-7.9c-1.5,0-2.4-.8-2.8-1.9l-7.8-17.1h-40.6c-2.5,5.7-5.1,11.3-7.6,17.1-.4.9-1.4,1.9-2.8,1.9h-8c-1.9,0-2.9-1.5-2.2-3.2ZM215.1,231.7l-15.3-34.1h-.6l-15.2,34.1h31.1Z"/>
+      <path d="M258.2,176.5c0-1.3,1.1-2.4,2.4-2.4h8.3c1.4,0,2.4,1.1,2.4,2.4v51.4c0,12.5,8,22.2,20.6,22.2s20.9-9.6,20.9-21.9v-51.6c0-1.3,1-2.4,2.4-2.4h8.3c1.3,0,2.4,1.1,2.4,2.4v52.2c0,18.9-14.3,33.7-34,33.7s-33.7-14.8-33.7-33.7v-52.3h0Z"/>
+      <path d="M352.8,248.7c1.1-1.6,2.2-3.4,3.2-5.1,1.1-1.6,2.8-2.2,4.2-1,.8.6,10.3,8.5,19.9,8.5s14-5.2,14-11.6-6.5-12.2-18.8-17.3c-12.7-5.4-22.7-12-22.7-26.4s7.5-23,27.3-23,21.8,6.5,23,7.4c1,.6,2,2.4.8,4.2-1,1.5-2.2,3.2-3.1,4.7-1,1.6-2.7,2.4-4.3,1.3-.9-.5-9.6-6.2-16.8-6.2-10.4,0-14,6.6-14,11.2,0,7.1,5.5,11.5,15.8,15.7,14.4,5.9,26.7,12.7,26.7,27.9s-11.6,23.6-27.8,23.6-24.7-8-26.7-9.8c-1.1-1-2-1.9-.7-4.1Z"/>
+      <path d="M448.2,185.9h-20.3c-1.4,0-2.4-1.1-2.4-2.4v-7c0-1.3,1-2.4,2.4-2.4h53.6c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-20.3v73c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-73h0Z"/>
+      <path d="M506.6,176.5c0-1.3,1-2.4,2.4-2.4h33.9c14.9,0,27.1,11.8,27.1,26.6s-7.6,20.9-18.5,25.2l17.1,31.6c.9,1.6,0,3.6-2.2,3.6h-9.7c-1,0-1.8-.6-2-1.1l-16.6-33h-18.8v31.7c0,1.3-1.1,2.4-2.4,2.4h-7.9c-1.4,0-2.4-1.1-2.4-2.4v-82.2ZM541.9,216.5c8.1,0,15.2-6.9,15.2-15.4s-7.1-14.8-15.2-14.8h-22.2v30.2h22.2Z"/>
+      <path d="M589.8,258l38.2-83.8c.4-.8,1.5-1.4,2.2-1.4h1.3c.6,0,1.8.6,2.2,1.4l38,83.8c.8,1.6-.3,3.2-2.2,3.2h-7.9c-1.5,0-2.4-.8-2.8-1.9l-7.8-17.1h-40.6c-2.5,5.7-5.1,11.3-7.6,17.1-.4.9-1.4,1.9-2.8,1.9h-7.9c-2,0-3-1.5-2.3-3.2ZM646.2,231.7l-15.3-34.1h-.6l-15.3,34.1h31.2Z"/>
+      <path d="M694,176.5c0-1.3,1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v73.1h33.8c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-44.3c-1.4,0-2.4-1.1-2.4-2.4v-82.4h-.1Z"/>
+      <path d="M765.8,176.5c0-1.3,1.1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v82.4c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-82.4Z"/>
+      <path d="M801,258l38.2-83.8c.4-.8,1.5-1.4,2.2-1.4h1.3c.6,0,1.8.6,2.2,1.4l38,83.8c.8,1.6-.3,3.2-2.2,3.2h-7.9c-1.5,0-2.4-.8-2.8-1.9l-7.8-17.1h-40.6c-2.5,5.7-5.1,11.3-7.6,17.1-.4.9-1.4,1.9-2.8,1.9h-7.9c-2,0-3-1.5-2.3-3.2ZM857.5,231.7l-15.3-34.1h-.6l-15.2,34.1h31.1Z"/>
+      <path d="M905.3,175.2c0-1.3,1.1-2.3,2.4-2.3h3.1l54,62.4h0v-58.8c0-1.3,1-2.4,2.4-2.4h8c1.3,0,2.4,1.1,2.4,2.4v83.8c0,1.3-1.1,2.3-2.4,2.3h-3.2l-54-64.2h0v60.6c0,1.3-1,2.4-2.4,2.4h-7.9c-1.3,0-2.4-1.1-2.4-2.4v-83.8h0Z"/>
+    </g>
+    <g>
+      <path d="M201.4,311.3c12.6,0,21.7,4.2,30.1,11.6,1.1,1,1.1,2.5.1,3.4l-5.5,5.6c-.9,1.1-2,1.1-3.1,0-5.9-5.1-13.8-8.3-21.5-8.3-17.8,0-31.2,14.9-31.2,32.4s13.5,32.2,31.3,32.2,15.4-3.6,21.4-8.2c1.1-.9,2.3-.8,2.9-.1l5.7,5.6c1,.9.8,2.5-.1,3.3-8.4,8.2-19.1,12.1-30.2,12.1-24.8,0-45-19.8-45-44.7.2-24.9,20.3-44.9,45.1-44.9Z"/>
+      <path d="M294.9,311.3c24.8,0,44.8,20,44.8,45s-19.9,44.7-44.8,44.7-44.7-19.8-44.7-44.7,19.8-45,44.7-45ZM294.9,388.3c17.8,0,32.4-14.4,32.4-32.2s-14.5-32.5-32.4-32.5-32.2,14.8-32.2,32.5c0,17.8,14.5,32.2,32.2,32.2Z"/>
+      <path d="M366.2,314.8c0-1.3,1.1-2.4,2.4-2.4h8.3c1.4,0,2.4,1.1,2.4,2.4v51.4c0,12.5,8,22.2,20.6,22.2s20.9-9.6,20.9-21.9v-51.6c0-1.3,1-2.4,2.4-2.4h8.3c1.3,0,2.4,1.1,2.4,2.4v52.1c0,18.9-14.3,33.7-34,33.7s-33.7-14.8-33.7-33.7v-52.2h0Z"/>
+      <path d="M466.6,313.4c0-1.3,1.1-2.3,2.4-2.3h3.1l54,62.4h0v-58.8c0-1.3,1-2.4,2.4-2.4h8c1.3,0,2.4,1.1,2.4,2.4v83.8c0,1.3-1.1,2.3-2.4,2.3h-3.2l-54-64.2h-.1v60.6c0,1.3-1,2.4-2.4,2.4h-7.9c-1.3,0-2.4-1.1-2.4-2.4v-83.8h0Z"/>
+      <path d="M611.4,311.3c12.6,0,21.7,4.2,30.1,11.6,1.1,1,1.1,2.5,0,3.4l-5.5,5.6c-.9,1.1-2,1.1-3.1,0-5.9-5.1-13.8-8.3-21.5-8.3-17.8,0-31.2,14.9-31.2,32.4s13.5,32.2,31.3,32.2,15.4-3.6,21.4-8.2c1.1-.9,2.3-.8,2.9-.1l5.7,5.6c1,.9.8,2.5,0,3.3-8.4,8.2-19.1,12.1-30.2,12.1-24.8,0-45-19.8-45-44.7,0-24.9,20.2-44.9,45.1-44.9Z"/>
+      <path d="M668.3,314.8c0-1.3,1.1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v82.4c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-82.4Z"/>
+      <path d="M714.5,314.8c0-1.3,1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v73.1h33.7c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-44.3c-1.4,0-2.4-1.1-2.4-2.4v-82.4h0Z"/>
+    </g>
+    <g>
+      <path d="M164.1,453.1c0-1.3,1-2.4,2.4-2.4h49.8c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-39.3v28.8h33.2c1.3,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1.1,2.4-2.4,2.4h-33.2v32.7c0,1.3-1.1,2.4-2.4,2.4h-8.1c-1.4,0-2.4-1.1-2.4-2.4v-82.6h0Z"/>
+      <path d="M281,449.5c24.8,0,44.8,20,44.8,45s-19.9,44.7-44.8,44.7-44.7-19.8-44.7-44.7,19.9-45,44.7-45ZM281,526.7c17.8,0,32.4-14.4,32.4-32.2s-14.5-32.5-32.4-32.5-32.2,14.8-32.2,32.5,14.5,32.2,32.2,32.2Z"/>
+      <path d="M353.5,453.1c0-1.3,1-2.4,2.4-2.4h33.9c14.9,0,27.1,11.8,27.1,26.6s-7.6,20.9-18.5,25.2l17.1,31.6c.9,1.6,0,3.6-2.2,3.6h-9.7c-1,0-1.8-.6-2-1.1l-16.6-33h-18.8v31.7c0,1.3-1.1,2.4-2.4,2.4h-8.1c-1.4,0-2.4-1.1-2.4-2.4v-82.2h.2ZM388.7,493c8.1,0,15.2-6.9,15.2-15.4s-7.1-14.8-15.2-14.8h-22.2v30.2h22.2Z"/>
+      <path d="M445.8,453.1c0-1.3,1-2.4,2.4-2.4h49.8c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-39.3v25.3h33.2c1.3,0,2.4,1.1,2.4,2.4v7c0,1.4-1.1,2.4-2.4,2.4h-33.2v26.7h39.3c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-49.8c-1.4,0-2.4-1.1-2.4-2.4v-82.5Z"/>
+      <path d="M527.7,453.1c0-1.3,1.1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v82.4c0,1.3-1.1,2.4-2.4,2.4h-8.3c-1.3,0-2.4-1.1-2.4-2.4v-82.4h.1Z"/>
+      <path d="M612.8,449.5c12,0,21.8,4.3,30.2,11.6,1,1,1.1,2.5,0,3.4-1.9,2-3.7,3.8-5.6,5.9-1,1.1-2,1-3.2-.1-5.9-5.1-13.5-8.4-21.1-8.4-17.7,0-31.2,14.9-31.2,32.4s13.5,32.2,31.2,32.2,17.4-3.7,18.7-4.2v-13.9h-12.2c-1.4,0-2.4-1-2.4-2.3v-7.3c0-1.4,1-2.4,2.4-2.4h22.7c1.3,0,2.3,1.1,2.3,2.4,0,9.9,0,20.1,0,30.1s-.5,1.6-1,2c0,0-12.9,8.2-30.8,8.2s-44.8-19.8-44.8-44.7c-.2-24.9,19.8-44.9,44.6-44.9Z"/>
+      <path d="M674.8,451.8c0-1.3,1.1-2.3,2.4-2.3h3.1l54,62.4h0v-58.8c0-1.3,1-2.4,2.4-2.4h8c1.3,0,2.4,1.1,2.4,2.4v83.8c0,1.3-1.1,2.3-2.4,2.3h-3.2l-54-64.2h0v60.6c0,1.3-1,2.4-2.4,2.4h-7.9c-1.3,0-2.4-1.1-2.4-2.4v-83.8h0Z"/>
+    </g>
+    <g>
+      <path d="M164.1,591.4c0-1.3,1-2.4,2.4-2.4h33.9c14.9,0,27.1,11.8,27.1,26.6s-7.6,20.9-18.5,25.2l17.1,31.6c.9,1.6,0,3.6-2.2,3.6h-9.7c-1,0-1.8-.6-2-1.1l-16.6-33h-18.8v31.7c0,1.3-1.1,2.4-2.4,2.4h-8.1c-1.4,0-2.4-1.1-2.4-2.4l.2-82.2h0ZM199.3,631.3c8.1,0,15.2-6.9,15.2-15.4s-7.1-14.8-15.2-14.8h-22.2v30.2h22.2Z"/>
+      <path d="M256.4,591.4c0-1.3,1-2.4,2.4-2.4h49.8c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-39.3v25.4h33.2c1.3,0,2.4,1.1,2.4,2.4v7c0,1.4-1.1,2.4-2.4,2.4h-33.2v26.7h39.3c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-49.8c-1.4,0-2.4-1.1-2.4-2.4v-82.6Z"/>
+      <path d="M338.3,591.4c0-1.3,1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v73.1h33.7c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-44.3c-1.4,0-2.4-1.1-2.4-2.4v-82.4h0Z"/>
+      <path d="M404.6,672.9l38.2-83.8c.4-.8,1.5-1.4,2.2-1.4h1.3c.6,0,1.8.6,2.2,1.4l38,83.8c.8,1.6-.3,3.2-2.2,3.2h-7.9c-1.5,0-2.4-.8-2.8-1.9l-7.8-17.1h-40.6c-2.5,5.7-5.1,11.3-7.6,17.1-.4.9-1.4,1.9-2.8,1.9h-7.9c-2,0-3-1.7-2.3-3.2ZM461.1,646.5l-15.3-34.1h-.6l-15.2,34.1h31.1Z"/>
+      <path d="M514.3,600.7h-20.3c-1.4,0-2.4-1.1-2.4-2.4v-7c0-1.3,1-2.4,2.4-2.4h53.5c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-20.3v73c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-73h.1Z"/>
+      <path d="M572.7,591.4c0-1.3,1.1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v82.4c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-82.4Z"/>
+      <path d="M657.7,587.7c24.8,0,44.8,20,44.8,45s-19.8,44.6-44.8,44.6-44.7-19.8-44.7-44.7,19.9-44.9,44.7-44.9ZM657.7,664.9c17.8,0,32.4-14.4,32.4-32.2s-14.5-32.5-32.4-32.5-32.2,14.8-32.2,32.5,14.6,32.2,32.2,32.2Z"/>
+      <path d="M730.2,590c0-1.3,1.1-2.3,2.4-2.3h3.1l54,62.4h0v-58.8c0-1.3,1-2.4,2.4-2.4h8c1.3,0,2.4,1.1,2.4,2.4v83.8c0,1.3-1.1,2.3-2.4,2.3h-3.2l-54-64.2h0v60.6c0,1.3-1,2.4-2.4,2.4h-7.9c-1.3,0-2.4-1.1-2.4-2.4v-83.8h0Z"/>
+      <path d="M831.1,663.5c1.1-1.6,2.2-3.4,3.2-5.1,1.1-1.6,2.8-2.2,4.2-1,.8.6,10.3,8.5,19.9,8.5s14-5.2,14-11.6-6.5-12.2-18.8-17.3c-12.7-5.4-22.7-12-22.7-26.4s7.5-23,27.3-23,21.8,6.5,23,7.4c1,.6,2,2.4.8,4.2-1,1.5-2.2,3.2-3.1,4.7-1,1.6-2.7,2.4-4.3,1.3-.9-.5-9.6-6.2-16.8-6.2-10.4,0-14,6.6-14,11.2,0,7.1,5.5,11.5,15.8,15.7,14.4,5.9,26.7,12.7,26.7,27.9s-11.6,23.6-27.8,23.6-24.7-8-26.7-9.8c-1.1-1.1-1.9-2-.7-4.1Z"/>
+    </g>
+  </g>
+  <g>
+    <path d="M881.1,349.5c2.8,3.6,4.2,7.9,4.2,12.9,0,8.6-3.8,17.1-11.4,25.4-7.9,8.6-16.2,12.9-25.1,12.9s-10.1-1.6-13.5-4.9-5.1-7.8-5.1-13.7c0-8.9,3.8-17.4,11.4-25.6,7.7-8.3,16.1-12.5,25.1-12.5,6.7.1,11.6,1.9,14.4,5.5ZM843.3,394.7c1.7,2.2,4.2,3.3,7.4,3.3,6.6,0,12.5-5,17.6-15,4.4-8.6,6.5-16.5,6.5-23.7s-.4-5.5-1.1-7.4c-1.4-3.5-4-5.3-7.8-5.3-6.2,0-12.1,4.7-17.5,14-5.1,8.7-7.7,17.3-7.7,25.7s.9,6.2,2.6,8.4Z"/>
+    <path d="M892.2,399.4l10.4-37.7c.9-3.2,1.4-5.1,1.6-5.8,0-.7.2-1.4.2-2.2,0-1.2-.3-2.1-1-2.8-.7-.7-2-1-3.9-1s-1,0-1.4.1c-.5.1-1,.1-1.6.2v-2c2.6-.4,4.5-.7,5.6-.9,1.1-.2,2.3-.4,3.6-.7l10.8-2.4c.2.2.4.3.5.5l-8.1,26.2c5-7.6,9.2-13.3,12.5-17,5.9-6.5,11.2-9.8,15.9-9.8s3.4.3,4.7,1c2.5,1.3,3.7,3.8,3.7,7.3s0,2-.3,3.1-.5,2.2-.8,3.4l-8,29.2c-.2.6-.3,1.4-.5,2.2s-.3,1.5-.3,1.9c0,.6,0,1.2.4,1.6.3.5.7.7,1.4.7,1,0,2.2-.6,3.5-1.9,1.3-1.2,3.5-3.9,6.5-8l1.8,1.6c-3.3,4.5-5.9,7.7-7.8,9.5-3.3,3.2-6.4,4.8-9.4,4.8s-2.7-.5-3.9-1.4c-1.3-.9-1.9-2.6-1.9-5s0-1.4.2-2.2c0-.8.2-1.4.4-2l7.8-29.7c.4-1.6.7-3,.8-4s.2-1.8.2-2.2c0-1-.2-1.8-.7-2.5s-1.3-1.1-2.5-1.1c-3.1,0-7,2.8-11.7,8.3-2.8,3.3-5.6,7.2-8.4,11.8-2.1,3.5-3.8,7-5,10.3-1.2,3.4-3.2,9.5-5.8,18.3h-9.5v.3Z"/>
+  </g>
+</svg></a><span class="bsep" aria-hidden="true"></span><a class="logo" href="#top" id="top" aria-label="Pax Ludens: The Gulf Reorders"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 396.85039 186.68239">
+  
+  <defs>
+    <style>
+      .gr0 {
+        fill: currentColor;
+      }
+
+      .gr1 {
+        fill: #f1ad3d;
+      }
+
+      .gr2 {
+        fill: currentColor;
+        font-family: 'Maven Pro', MavenProRegular, Arial, sans-serif;
+        font-size: 43px;
+      }
+
+      .gr3 {
+        fill: #e3bd33;
+      }
+    footer .base{margin-top:clamp(16px,2vw,28px)}
+</style>
+  </defs>
+  <g>
+    <g>
+      <path class="gr1" d="M67.54122,88.21043c.00046.01336.00059.02672.00104.04007,0,.01349-.00104.02672-.00104.0402v-.08028Z"/>
+      <path class="gr1" d="M86.61973,88.2505c-.00046-.01336-.00059-.02672-.00104-.04007v.02483c-.0002-.00834-.00039-.01668-.00065-.02502v.08028c0-.00841.00033-.01681.00065-.02515v.02535c0-.01349.00104-.02672.00104-.0402Z"/>
+      <path class="gr1" d="M86.61804,88.21024v.08028c0-.00841.00033-.01681.00065-.02515v-.0301c-.0002-.00834-.00039-.01668-.00065-.02502Z"/>
+      <path class="gr1" d="M86.61869,88.23526c.00007.00502.0002.01003.00039.01505,0,.00508-.0002.01003-.00039.01505v.02535c0-.01349.00104-.02672.00104-.0402-.00046-.01336-.00059-.02672-.00104-.04007v.02483Z"/>
+      <path class="gr1" d="M86.61869,88.23526v.0301c.0002-.00502.00039-.00997.00039-.01505-.0002-.00502-.00033-.01003-.00039-.01505Z"/>
+      <g>
+        <path class="gr3" d="M56.64663,88.29058c0,.19144.01205.37988.0144.57074h10.89231c.00085-.06868.00143-.11814.00143-.11814-.00195-.1644-.00684-.32828-.01251-.49268,0,.01349-.00104.02672-.00104.0402v-.08028c.00046.01336.00059.02672.00104.04007.02013-17.55155,13.15819-32.07895,30.11548-34.3088v-10.97506c-23.0252,2.27826-41.01111,21.69939-41.01111,45.32394Z"/>
+        <path class="gr3" d="M106.73638,42.96671v10.975c16.94732,2.22861,30.08094,16.7405,30.11548,34.27863l-.01564.64098h10.89622c.00235-.19085.0144-.3793.0144-.57074,0-23.62435-17.98558-43.04522-41.01046-45.32387Z"/>
+        <path class="gr3" d="M89.07086,88.86132h-10.90801l.02815-.55341c.57178-11.2387,8.78881-20.33102,19.46674-22.37021v11.27975c-4.81684,1.77522-8.31353,6.27864-8.58688,11.64387Z"/>
+        <path class="gr3" d="M115.3226,88.86132h10.90866l-.02815-.55549c-.57361-11.23766-8.78985-20.329-19.46674-22.36813v11.27995c4.81651,1.77549,8.31288,6.27871,8.58622,11.64367Z"/>
+        <circle class="gr3" cx="102.19673" cy="102.10969" r="9.02638"/>
+      </g>
+      <path class="gr0" d="M60.83785,57.60494c-4.26768-1.94069-9.00416-3.03056-13.99794-3.03056-18.70179,0-33.86252,15.16087-33.86252,33.86266,0,.14222.00898.28239.0107.42428h24.09395c.26297-5.16136,4.53111-9.26555,9.75787-9.26555.94726,0,1.86155.13865,2.72769.39013,3.91315,1.13611,6.81497,4.64949,7.03031,8.87542h24.09389c.00178-.14189.0107-.28206.0107-.42428,0-13.70801-8.15011-25.5048-19.86465-30.83209Z"/>
+    </g>
+    <g>
+      <path class="gr0" d="M177.20559,42.57469c1.50949.33575,3.01898.50293,4.58467.50293,8.32994,0,12.9701-5.0321,12.9701-14.14524,0-13.25037-8.77738-14.70296-12.52337-14.70296-8.6657,0-11.74017,4.86352-11.74017,9.3927v24.92425h6.70877v-5.97167ZM177.20559,23.00681c0-2.34888,2.06861-3.01898,5.0314-3.01898,4.3051,0,5.7591,2.9066,5.7591,9.28031,0,6.76426-2.62774,8.61021-6.65328,8.61021-1.62117,0-2.96349-.16858-4.13723-.33575v-14.53579Z"/>
+      <path class="gr0" d="M212.09526,42.96664c8.665,0,11.74017-4.86493,11.74017-9.3927v-7.54816c0-7.65914-4.3606-11.85256-12.29929-11.85256-3.35474,0-6.20654.61532-8.55402,1.56498v5.42265c2.06791-.83728,4.80733-1.3964,8.16207-1.3964,4.3606,0,5.92698,2.23649,5.92698,5.25407-1.51019-.22196-3.18756-.39054-4.92112-.39054-11.18105,0-12.01973,6.70947-12.01973,8.77738,0,4.64016,3.13137,9.56128,11.96494,9.56128ZM213.10112,28.93238c1.51019,0,2.85181.16858,4.02484.33575v3.52191c0,2.57225-1.34161,4.24961-5.08689,4.24961-3.52191,0-5.25547-1.56639-5.25547-4.47298,0-2.29128,1.78835-3.6343,6.31752-3.6343Z"/>
+      <polygon class="gr0" points="245.69741 27.81414 255.03392 14.61996 247.59815 14.61996 242.00692 22.56007 236.4171 14.61996 228.19744 14.61996 237.8697 28.42945 227.97407 42.5185 235.24266 42.5185 241.56019 33.63014 247.82152 42.5185 256.03978 42.5185 245.69741 27.81414"/>
+      <rect class="gr0" x="170.49682" y="52.86227" width="6.70877" height="36.00722"/>
+      <path class="gr0" d="M204.48951,77.12792c0,4.47298-1.67737,6.31893-5.87009,6.31893-4.13723,0-5.81389-1.84595-5.81389-6.31893v-16.15556h-6.76496v15.26208c0,8.21826,4.69635,13.08179,12.57886,13.08179,7.9394,0,12.63575-4.86352,12.63575-13.08179v-15.26208h-6.76567v16.15556Z"/>
+      <path class="gr0" d="M236.13614,60.97236c-1.50879-.28097-3.07377-.44814-4.64016-.44814-8.32924,0-12.91461,4.97591-12.91461,14.08905,0,13.25037,8.7226,14.70296,12.46787,14.70296,8.665,0,11.79637-4.86352,11.79637-9.3927v-27.29946h-6.70947v8.3483ZM236.13614,80.53885c0,2.34888-2.06791,3.02039-5.08689,3.02039-4.3044,0-5.7584-2.908-5.7584-9.28172,0-6.59709,2.57084-8.44163,6.42851-8.44163,1.73356,0,3.18756.16717,4.41679.44674v14.25622Z"/>
+      <path class="gr0" d="M261.80099,60.46803c-9.11314,0-12.46787,6.42991-12.46787,14.76056,0,11.85115,7.43577,14.08764,12.9708,14.08764,4.47298,0,7.9387-1.11825,10.51024-2.51465v-5.42405c-2.34817,1.11825-5.53433,2.1817-9.50438,2.1817-3.24235,0-6.70807-.7277-7.10002-6.09416h17.94601c.11239-1.11825.11239-2.23649.11239-3.46712,0-6.98763-3.74598-13.52993-12.46717-13.52993ZM256.20976,72.82351c.39195-4.97591,2.29268-6.87524,5.59123-6.87524,3.5781,0,5.31167,3.35333,5.64602,6.87524h-11.23724Z"/>
+      <path class="gr0" d="M293.78126,60.52422c-7.10002,0-12.57886,2.96279-12.80363,3.07517v25.2701h6.70947v-21.91536c1.50879-.28097,3.29854-.50293,5.19928-.50293,6.09416,0,6.59709,2.62703,6.59709,5.08689v17.3314h6.65328v-16.77228c0-7.26719-4.58396-11.573-12.35549-11.573Z"/>
+      <path class="gr0" d="M319.89426,68.6315c0-1.78975,2.01172-2.34888,4.80733-2.34888,2.62844,0,4.75254.55912,6.42991,1.34161v-5.08689c-2.1241-1.23063-4.69635-2.01312-7.60435-2.01312-5.53363,0-10.34237,2.8504-10.34237,8.7226,0,9.67086,13.30656,6.98763,13.30656,11.57159,0,1.51019-.33575,2.68463-4.64016,2.68463-3.18756,0-5.87079-1.11825-7.88391-2.46126v5.98177c2.34888,1.34302,5.31167,2.29268,8.83358,2.29268,6.37372,0,10.39856-3.52191,10.39856-8.16207,0-11.40442-13.30515-8.21826-13.30515-12.52266Z"/>
+    </g>
+  </g>
+  <g>
+    <text class="gr2" transform="translate(161.54729 134.43591)"><tspan x="0" y="0">THE GULF</tspan></text>
+    <text class="gr2" transform="translate(168.4923 172.87464)"><tspan x="0" y="0">REORDERS</tspan></text>
+  </g>
+</svg></a></div>
+    <nav aria-label="Links">
+      <a href="https://orbis.paxludens.org" target="_blank" rel="noopener">Orbis</a>
+      <a href="https://www.instagram.com/paxludens.au/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/company/acfr-au/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:paxludens@acfr.org.au?subject=Pax%20Ludens">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="open grid">
+      <h1 class="rv">Corporate Strategy When Alignment Becomes a Choice</h1>
+      <p class="when rv" style="--i:1">Friday, 13 November 2026 <span class="sep">·</span> University of St.Gallen, Switzerland</p>
+      <p class="strap rv" style="--i:2">A one-day strategy simulation for the corporate diplomat. Teams of business leaders, officials and academics negotiate a fictional near-future Gulf, where every choice of partner signals alignment.</p>
+    </div>
+
+    <section class="quote" aria-label="Quote">
+      <blockquote class="rv"><p>“Pax Ludens is a conversation with the future, where the future talks back.”</p><cite>Prashanth Shanmugan, President, Australian Council on Foreign Relations</cite></blockquote>
+    </section>
+
+    <section class="grid" id="about">
+      <div class="c-head rv"><h2 class="sh">A laboratory for the corporate diplomat</h2></div>
+      <div class="c-body stack rv" style="--i:1">
+        <p class="lead">Pax Ludens (Latin for “peace at play”) is more than a simulation. It is a hands-on laboratory for strategy, diplomacy and leadership, dedicated to training the corporate diplomat.</p>
+        <p>Business and geopolitics can no longer be managed separately. Decisions on investment, market access, technology and supply chains are increasingly bound up with government relationships, and a choice that looks purely commercial can carry political meaning.</p>
+      </div>
+      <div class="c-head rv"><h2 class="sh">The power of simulation</h2></div>
+      <div class="c-body stack rv" style="--i:1">
+        <p class="lead">Discussion tests logic; play tests behaviour, and behaviour is what breaks strategies.</p>
+        <details class="more">
+          <summary><span>Read more</span><i aria-hidden="true"></i></summary>
+          <div class="more-body stack">
+            <p>In a board meeting, a plan only has to convince the people who wrote it. In a simulation, it has to survive people trying to beat it. Better to fail ten times in a room than once in the market.</p>
+            <p>Simulation gaming is a powerful tool for building knowledge, fostering empathy and facilitating dialogue on critical global issues. At its core, Pax Ludens is about people. Stepping into others’ shoes builds the empathy and understanding that negotiation and conflict resolution depend on.</p>
+            <p>Pax Ludens is an initiative of the Australian Council on Foreign Relations.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="grid" id="gulf">
+      <div class="c-head rv"><h2 class="sh">Doomsday: Friday, 13&nbsp;November 2026</h2></div>
+      <div class="c-body stack rv" style="--i:1">
+        <p class="lead">In 1960, a group of academics published a paper in the journal <i>Science</i> with a striking title: “Doomsday: Friday, 13 November, A.D. 2026”. Friday, 13 November 2026 is the date of this edition of Pax Ludens.</p>
+        <details class="more">
+          <summary><span>Read the story</span><i aria-hidden="true"></i></summary>
+          <div class="more-body">
+            <div class="cols2">
+              <p>They fitted a single formula to two thousand years of population data, with an average error of about 7 percent, and calculated that if humanity carried on as it always had, the world’s population would become infinite on that date.</p>
+              <p>They even showed how persuasive the trend was. With the same formula, Charlemagne could have dated doomsday to within 300 years, Napoleon to within 30, and the authors themselves to within 10. The more evidence they had, the more certain the prediction became.</p>
+              <p>Doomsday did not arrive. World population growth peaked in the 1960s, shortly after the paper appeared. Families have shrunk to just over two children per woman on average, and the United Nations now expects the world’s population, about 8.2 billion today, to peak at around 10.3 billion in the 2080s. The formula fitted the past almost perfectly. It failed because people changed their behaviour.</p>
+              <p>The authors themselves pointed to why. Because human beings communicate, they argued, they can form coalitions, turning a competitive, near zero-sum game among many players into what amounts to a single team playing against nature.</p>
+            </div>
+            <p class="note">von Foerster, H., Mora, P. M. and Amiot, L. W. (1960). Doomsday: Friday, 13 November, A.D. 2026. <i>Science</i>, 132(3436), 1291–1295. United Nations (2024), <i>World Population Prospects 2024</i>.</p>
+          </div>
+        </details>
+        <p class="dd-q">That is the question at the heart of Pax Ludens: what happens when we extrapolate the past into the future, and what role does human agency play in changing the trajectory?</p>
+      </div>
+    </section>
+
+    <section class="grid" id="edition">
+      <div class="c-head rv"><h2 class="sh">Alignment is no longer a given</h2></div>
+      <div class="c-body stack rv" style="--i:1">
+        <p class="lead">This edition turns to the Gulf, where energy, capital, logistics and advanced technology increasingly meet, and where few trend lines from the past can be relied upon. For governments and companies alike, alignment is no longer a given. It is a choice, and every choice has a price.</p>
+        <details class="more">
+          <summary><span>How the game works</span><i aria-hidden="true"></i></summary>
+          <div class="more-body stack">
+            <p>The Australian Council on Foreign Relations and the University of St.Gallen’s Competence Centre for Mastering the Unknown will host <i>Pax Ludens: The Gulf Reorders – Corporate Strategy When Alignment Becomes a Choice</i> on Friday, 13 November 2026 at the University of St.Gallen.</p>
+            <p>Over one day, participants join teams representing states, companies and institutions, each with its own interests, objectives and red lines. The simulation is set in a fictional near-future Gulf, built around a major cross-regional investment initiative in which Gulf capital and energy, European industrial capabilities, American technology and Asian supply chains all appear to fit together. The scenario does not re-enact current events; it draws on the forces reshaping the region today.</p>
+            <p>Round by round, teams negotiate, form alliances and make their moves, and each decision shapes the situation every other team faces. There is no script: how events unfold is of the participants’ own making. A team of facilitators runs the simulation, coordinated from a central backroom.</p>
+          </div>
+        </details>
+      </div>
+      <ul class="themes4">
+        <li class="rv"><b>Capital and investment</b>How sovereign capital, corporate investment and partnership decisions shape access to markets and opportunities, and the conditions that may come attached.</li>
+        <li class="rv" style="--i:1"><b>Technology and economic security</b>How technology controls, investment screening and economic-security policies turn the choice of suppliers and partners into a signal of political alignment.</li>
+        <li class="rv" style="--i:2"><b>Energy, logistics and connectivity</b>How disruptions to energy, shipping and digital infrastructure, and the corridors built to bypass them, ripple through corporate strategies.</li>
+        <li class="rv" style="--i:3"><b>Strategic autonomy and alignment</b>How states and companies resist being forced into a single bloc, and what it costs to choose, or to avoid choosing.</li>
+      </ul>
+    </section>
+
+    <section class="grid" id="orbis">
+      <div class="c-head rv"><h2 class="sh">Orbis</h2></div>
+      <div class="c-body stack rv" style="--i:1">
+        <p class="lead">Orbis is the digital platform behind Pax Ludens. It carries the simulation from round to round: teams receive their briefings and developments there, and the backroom uses it to run the game and prepare the debrief.</p>
+        <p><a class="orbis-link" href="https://orbis.paxludens.org" target="_blank" rel="noopener">orbis.paxludens.org</a></p>
+      </div>
+    </section>
+
+    <section class="grid" id="people">
+      <div class="c-head rv"><h2 class="sh">People</h2></div>
+      <div class="c-body stack" style="gap:40px">
+        <div class="rv"><h3 class="p-h">Keynote</h3><div class="keynote"><span class="n">Maryna Sviatenko</span><span class="soft">Project Lead, Strategic Foresight, World Economic Forum</span></div></div>
+        <div class="rv">
+          <h3 class="p-h">Facilitators</h3><p class="p-intro">An international team from academia, industry and diplomacy.</p>
+          <ul class="people">
+            <li><span class="n">Prof. Dr. Patrik Aspers</span><span class="r">Dean, School of Humanities and Social Sciences; Head, Competence Centre for Mastering the Unknown, University of St.Gallen</span></li>
+            <li><span class="n">Prof. Dr. Riccardo Bocco</span><span class="r">Emeritus Professor of Political Sociology, Geneva Graduate Institute</span></li>
+            <li><span class="n">Dr. Ulrich Mans</span><span class="r">Director of Geopolitics &amp; Governmental Affairs, QuantWare; Advisory Board, Australian Council on Foreign Relations</span></li>
+            <li><span class="n">Dr. Marianne Schörling</span><span class="r">Product &amp; Anticipation Experience Lead, Geneva Science and Diplomacy Anticipator</span></li>
+            <li><span class="n">Prashanth Shanmugan</span><span class="r">President, Australian Council on Foreign Relations; Adjunct Lecturer, University of St.Gallen</span></li>
+            <li><span class="n">Gideon Shimshon</span><span class="r">Educational strategist and EdTech entrepreneur, Global Health Education Group</span></li>
+          </ul>
+        </div>
+        
+      </div>
+    </section>
+
+    <section class="grid" id="participate">
+      <div class="c-head rv"><h2 class="sh">A curated cohort</h2></div>
+      <p class="c-body lead rv" style="--i:1">Pax Ludens brings together a curated cohort of high-calibre individuals from across academia, government and industry. Participation is by invitation and application, designed to foster diversity of thought, sector and expertise. Each participant contributes unique experience and networks, helping to create a stimulating environment for meaningful dialogue, practical learning and long-term connection.</p>
+      <div class="c-head rv" id="contact"><h2 class="sh">Contact</h2></div>
+      <div class="c-body rv" style="--i:1"><div class="mail"><a class="addr" id="mail" href="mailto:paxludens@acfr.org.au?subject=Pax%20Ludens">paxludens@acfr.org.au</a></div></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="hosts">
+      <div class="host"><span class="hl">An initiative of</span><a class="acfr" href="https://www.acfr.org.au/" target="_blank" rel="noopener" aria-label="Australian Council on Foreign Relations"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" focusable="false" version="1.1" viewBox="150 166 1700 242">
+  
+  <g>
+    <g>
+      <path d="M158.8,258l38.2-83.8c.4-.8,1.5-1.4,2.2-1.4h1.3c.6,0,1.8.6,2.2,1.4l38,83.8c.8,1.6-.3,3.2-2.2,3.2h-7.9c-1.5,0-2.4-.8-2.8-1.9l-7.8-17.1h-40.6c-2.5,5.7-5.1,11.3-7.6,17.1-.4.9-1.4,1.9-2.8,1.9h-8c-1.9,0-2.9-1.5-2.2-3.2ZM215.1,231.7l-15.3-34.1h-.6l-15.2,34.1h31.1Z" />
+      <path d="M258.2,176.5c0-1.3,1.1-2.4,2.4-2.4h8.3c1.4,0,2.4,1.1,2.4,2.4v51.4c0,12.5,8,22.2,20.6,22.2s20.9-9.6,20.9-21.9v-51.6c0-1.3,1-2.4,2.4-2.4h8.3c1.3,0,2.4,1.1,2.4,2.4v52.2c0,18.9-14.3,33.7-34,33.7s-33.7-14.8-33.7-33.7v-52.3h0Z" />
+      <path d="M352.8,248.7c1.1-1.6,2.2-3.4,3.2-5.1,1.1-1.6,2.8-2.2,4.2-1,.8.6,10.3,8.5,19.9,8.5s14-5.2,14-11.6-6.5-12.2-18.8-17.3c-12.7-5.4-22.7-12-22.7-26.4s7.5-23,27.3-23,21.8,6.5,23,7.4c1,.6,2,2.4.8,4.2-1,1.5-2.2,3.2-3.1,4.7-1,1.6-2.7,2.4-4.3,1.3-.9-.5-9.6-6.2-16.8-6.2-10.4,0-14,6.6-14,11.2,0,7.1,5.5,11.5,15.8,15.7,14.4,5.9,26.7,12.7,26.7,27.9s-11.6,23.6-27.8,23.6-24.7-8-26.7-9.8c-1.1-1-2-1.9-.7-4.1Z" />
+      <path d="M448.2,185.9h-20.3c-1.4,0-2.4-1.1-2.4-2.4v-7c0-1.3,1-2.4,2.4-2.4h53.6c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-20.3v73c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-73h0Z" />
+      <path d="M506.6,176.5c0-1.3,1-2.4,2.4-2.4h33.9c14.9,0,27.1,11.8,27.1,26.6s-7.6,20.9-18.5,25.2l17.1,31.6c.9,1.6,0,3.6-2.2,3.6h-9.7c-1,0-1.8-.6-2-1.1l-16.6-33h-18.8v31.7c0,1.3-1.1,2.4-2.4,2.4h-7.9c-1.4,0-2.4-1.1-2.4-2.4v-82.2ZM541.9,216.5c8.1,0,15.2-6.9,15.2-15.4s-7.1-14.8-15.2-14.8h-22.2v30.2h22.2Z" />
+      <path d="M589.8,258l38.2-83.8c.4-.8,1.5-1.4,2.2-1.4h1.3c.6,0,1.8.6,2.2,1.4l38,83.8c.8,1.6-.3,3.2-2.2,3.2h-7.9c-1.5,0-2.4-.8-2.8-1.9l-7.8-17.1h-40.6c-2.5,5.7-5.1,11.3-7.6,17.1-.4.9-1.4,1.9-2.8,1.9h-7.9c-2,0-3-1.5-2.3-3.2ZM646.2,231.7l-15.3-34.1h-.6l-15.3,34.1h31.2Z" />
+      <path d="M694,176.5c0-1.3,1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v73.1h33.8c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-44.3c-1.4,0-2.4-1.1-2.4-2.4v-82.4h-.1Z" />
+      <path d="M765.8,176.5c0-1.3,1.1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v82.4c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-82.4Z" />
+      <path d="M801,258l38.2-83.8c.4-.8,1.5-1.4,2.2-1.4h1.3c.6,0,1.8.6,2.2,1.4l38,83.8c.8,1.6-.3,3.2-2.2,3.2h-7.9c-1.5,0-2.4-.8-2.8-1.9l-7.8-17.1h-40.6c-2.5,5.7-5.1,11.3-7.6,17.1-.4.9-1.4,1.9-2.8,1.9h-7.9c-2,0-3-1.5-2.3-3.2ZM857.5,231.7l-15.3-34.1h-.6l-15.2,34.1h31.1Z" />
+      <path d="M905.3,175.2c0-1.3,1.1-2.3,2.4-2.3h3.1l54,62.4h0v-58.8c0-1.3,1-2.4,2.4-2.4h8c1.3,0,2.4,1.1,2.4,2.4v83.8c0,1.3-1.1,2.3-2.4,2.3h-3.2l-54-64.2h0v60.6c0,1.3-1,2.4-2.4,2.4h-7.9c-1.3,0-2.4-1.1-2.4-2.4v-83.8h0Z" />
+    </g>
+    <g transform="translate(891.3,-138.3)">
+      <path d="M201.4,311.3c12.6,0,21.7,4.2,30.1,11.6,1.1,1,1.1,2.5.1,3.4l-5.5,5.6c-.9,1.1-2,1.1-3.1,0-5.9-5.1-13.8-8.3-21.5-8.3-17.8,0-31.2,14.9-31.2,32.4s13.5,32.2,31.3,32.2,15.4-3.6,21.4-8.2c1.1-.9,2.3-.8,2.9-.1l5.7,5.6c1,.9.8,2.5-.1,3.3-8.4,8.2-19.1,12.1-30.2,12.1-24.8,0-45-19.8-45-44.7.2-24.9,20.3-44.9,45.1-44.9Z" />
+      <path d="M294.9,311.3c24.8,0,44.8,20,44.8,45s-19.9,44.7-44.8,44.7-44.7-19.8-44.7-44.7,19.8-45,44.7-45ZM294.9,388.3c17.8,0,32.4-14.4,32.4-32.2s-14.5-32.5-32.4-32.5-32.2,14.8-32.2,32.5c0,17.8,14.5,32.2,32.2,32.2Z" />
+      <path d="M366.2,314.8c0-1.3,1.1-2.4,2.4-2.4h8.3c1.4,0,2.4,1.1,2.4,2.4v51.4c0,12.5,8,22.2,20.6,22.2s20.9-9.6,20.9-21.9v-51.6c0-1.3,1-2.4,2.4-2.4h8.3c1.3,0,2.4,1.1,2.4,2.4v52.1c0,18.9-14.3,33.7-34,33.7s-33.7-14.8-33.7-33.7v-52.2h0Z" />
+      <path d="M466.6,313.4c0-1.3,1.1-2.3,2.4-2.3h3.1l54,62.4h0v-58.8c0-1.3,1-2.4,2.4-2.4h8c1.3,0,2.4,1.1,2.4,2.4v83.8c0,1.3-1.1,2.3-2.4,2.3h-3.2l-54-64.2h-.1v60.6c0,1.3-1,2.4-2.4,2.4h-7.9c-1.3,0-2.4-1.1-2.4-2.4v-83.8h0Z" />
+      <path d="M611.4,311.3c12.6,0,21.7,4.2,30.1,11.6,1.1,1,1.1,2.5,0,3.4l-5.5,5.6c-.9,1.1-2,1.1-3.1,0-5.9-5.1-13.8-8.3-21.5-8.3-17.8,0-31.2,14.9-31.2,32.4s13.5,32.2,31.3,32.2,15.4-3.6,21.4-8.2c1.1-.9,2.3-.8,2.9-.1l5.7,5.6c1,.9.8,2.5,0,3.3-8.4,8.2-19.1,12.1-30.2,12.1-24.8,0-45-19.8-45-44.7,0-24.9,20.2-44.9,45.1-44.9Z" />
+      <path d="M668.3,314.8c0-1.3,1.1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v82.4c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-82.4Z" />
+      <path d="M714.5,314.8c0-1.3,1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v73.1h33.7c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-44.3c-1.4,0-2.4-1.1-2.4-2.4v-82.4h0Z" />
+    </g>
+    <g transform="translate(0,-138.4)">
+      <path d="M164.1,453.1c0-1.3,1-2.4,2.4-2.4h49.8c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-39.3v28.8h33.2c1.3,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1.1,2.4-2.4,2.4h-33.2v32.7c0,1.3-1.1,2.4-2.4,2.4h-8.1c-1.4,0-2.4-1.1-2.4-2.4v-82.6h0Z" />
+      <path d="M281,449.5c24.8,0,44.8,20,44.8,45s-19.9,44.7-44.8,44.7-44.7-19.8-44.7-44.7,19.9-45,44.7-45ZM281,526.7c17.8,0,32.4-14.4,32.4-32.2s-14.5-32.5-32.4-32.5-32.2,14.8-32.2,32.5,14.5,32.2,32.2,32.2Z" />
+      <path d="M353.5,453.1c0-1.3,1-2.4,2.4-2.4h33.9c14.9,0,27.1,11.8,27.1,26.6s-7.6,20.9-18.5,25.2l17.1,31.6c.9,1.6,0,3.6-2.2,3.6h-9.7c-1,0-1.8-.6-2-1.1l-16.6-33h-18.8v31.7c0,1.3-1.1,2.4-2.4,2.4h-8.1c-1.4,0-2.4-1.1-2.4-2.4v-82.2h.2ZM388.7,493c8.1,0,15.2-6.9,15.2-15.4s-7.1-14.8-15.2-14.8h-22.2v30.2h22.2Z" />
+      <path d="M445.8,453.1c0-1.3,1-2.4,2.4-2.4h49.8c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-39.3v25.3h33.2c1.3,0,2.4,1.1,2.4,2.4v7c0,1.4-1.1,2.4-2.4,2.4h-33.2v26.7h39.3c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-49.8c-1.4,0-2.4-1.1-2.4-2.4v-82.5Z" />
+      <path d="M527.7,453.1c0-1.3,1.1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v82.4c0,1.3-1.1,2.4-2.4,2.4h-8.3c-1.3,0-2.4-1.1-2.4-2.4v-82.4h.1Z" />
+      <path d="M612.8,449.5c12,0,21.8,4.3,30.2,11.6,1,1,1.1,2.5,0,3.4-1.9,2-3.7,3.8-5.6,5.9-1,1.1-2,1-3.2-.1-5.9-5.1-13.5-8.4-21.1-8.4-17.7,0-31.2,14.9-31.2,32.4s13.5,32.2,31.2,32.2,17.4-3.7,18.7-4.2v-13.9h-12.2c-1.4,0-2.4-1-2.4-2.3v-7.3c0-1.4,1-2.4,2.4-2.4h22.7c1.3,0,2.3,1.1,2.3,2.4,0,9.9,0,20.1,0,30.1s-.5,1.6-1,2c0,0-12.9,8.2-30.8,8.2s-44.8-19.8-44.8-44.7c-.2-24.9,19.8-44.9,44.6-44.9Z" />
+      <path d="M674.8,451.8c0-1.3,1.1-2.3,2.4-2.3h3.1l54,62.4h0v-58.8c0-1.3,1-2.4,2.4-2.4h8c1.3,0,2.4,1.1,2.4,2.4v83.8c0,1.3-1.1,2.3-2.4,2.3h-3.2l-54-64.2h0v60.6c0,1.3-1,2.4-2.4,2.4h-7.9c-1.3,0-2.4-1.1-2.4-2.4v-83.8h0Z" />
+    </g>
+    <g transform="translate(653.2,-276.5)">
+      <path d="M164.1,591.4c0-1.3,1-2.4,2.4-2.4h33.9c14.9,0,27.1,11.8,27.1,26.6s-7.6,20.9-18.5,25.2l17.1,31.6c.9,1.6,0,3.6-2.2,3.6h-9.7c-1,0-1.8-.6-2-1.1l-16.6-33h-18.8v31.7c0,1.3-1.1,2.4-2.4,2.4h-8.1c-1.4,0-2.4-1.1-2.4-2.4l.2-82.2h0ZM199.3,631.3c8.1,0,15.2-6.9,15.2-15.4s-7.1-14.8-15.2-14.8h-22.2v30.2h22.2Z" />
+      <path d="M256.4,591.4c0-1.3,1-2.4,2.4-2.4h49.8c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-39.3v25.4h33.2c1.3,0,2.4,1.1,2.4,2.4v7c0,1.4-1.1,2.4-2.4,2.4h-33.2v26.7h39.3c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-49.8c-1.4,0-2.4-1.1-2.4-2.4v-82.6Z" />
+      <path d="M338.3,591.4c0-1.3,1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v73.1h33.7c1.4,0,2.4,1.1,2.4,2.4v6.9c0,1.3-1,2.4-2.4,2.4h-44.3c-1.4,0-2.4-1.1-2.4-2.4v-82.4h0Z" />
+      <path d="M404.6,672.9l38.2-83.8c.4-.8,1.5-1.4,2.2-1.4h1.3c.6,0,1.8.6,2.2,1.4l38,83.8c.8,1.6-.3,3.2-2.2,3.2h-7.9c-1.5,0-2.4-.8-2.8-1.9l-7.8-17.1h-40.6c-2.5,5.7-5.1,11.3-7.6,17.1-.4.9-1.4,1.9-2.8,1.9h-7.9c-2,0-3-1.7-2.3-3.2ZM461.1,646.5l-15.3-34.1h-.6l-15.2,34.1h31.1Z" />
+      <path d="M514.3,600.7h-20.3c-1.4,0-2.4-1.1-2.4-2.4v-7c0-1.3,1-2.4,2.4-2.4h53.5c1.4,0,2.4,1.1,2.4,2.4v7c0,1.3-1,2.4-2.4,2.4h-20.3v73c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-73h.1Z" />
+      <path d="M572.7,591.4c0-1.3,1.1-2.4,2.4-2.4h8.2c1.3,0,2.4,1.1,2.4,2.4v82.4c0,1.3-1.1,2.4-2.4,2.4h-8.2c-1.3,0-2.4-1.1-2.4-2.4v-82.4Z" />
+      <path d="M657.7,587.7c24.8,0,44.8,20,44.8,45s-19.8,44.6-44.8,44.6-44.7-19.8-44.7-44.7,19.9-44.9,44.7-44.9ZM657.7,664.9c17.8,0,32.4-14.4,32.4-32.2s-14.5-32.5-32.4-32.5-32.2,14.8-32.2,32.5,14.6,32.2,32.2,32.2Z" />
+      <path d="M730.2,590c0-1.3,1.1-2.3,2.4-2.3h3.1l54,62.4h0v-58.8c0-1.3,1-2.4,2.4-2.4h8c1.3,0,2.4,1.1,2.4,2.4v83.8c0,1.3-1.1,2.3-2.4,2.3h-3.2l-54-64.2h0v60.6c0,1.3-1,2.4-2.4,2.4h-7.9c-1.3,0-2.4-1.1-2.4-2.4v-83.8h0Z" />
+      <path d="M831.1,663.5c1.1-1.6,2.2-3.4,3.2-5.1,1.1-1.6,2.8-2.2,4.2-1,.8.6,10.3,8.5,19.9,8.5s14-5.2,14-11.6-6.5-12.2-18.8-17.3c-12.7-5.4-22.7-12-22.7-26.4s7.5-23,27.3-23,21.8,6.5,23,7.4c1,.6,2,2.4.8,4.2-1,1.5-2.2,3.2-3.1,4.7-1,1.6-2.7,2.4-4.3,1.3-.9-.5-9.6-6.2-16.8-6.2-10.4,0-14,6.6-14,11.2,0,7.1,5.5,11.5,15.8,15.7,14.4,5.9,26.7,12.7,26.7,27.9s-11.6,23.6-27.8,23.6-24.7-8-26.7-9.8c-1.1-1.1-1.9-2-.7-4.1Z" />
+    </g>
+  </g>
+  <g transform="translate(891.3,-138.3)">
+    <path d="M881.1,349.5c2.8,3.6,4.2,7.9,4.2,12.9,0,8.6-3.8,17.1-11.4,25.4-7.9,8.6-16.2,12.9-25.1,12.9s-10.1-1.6-13.5-4.9-5.1-7.8-5.1-13.7c0-8.9,3.8-17.4,11.4-25.6,7.7-8.3,16.1-12.5,25.1-12.5,6.7.1,11.6,1.9,14.4,5.5ZM843.3,394.7c1.7,2.2,4.2,3.3,7.4,3.3,6.6,0,12.5-5,17.6-15,4.4-8.6,6.5-16.5,6.5-23.7s-.4-5.5-1.1-7.4c-1.4-3.5-4-5.3-7.8-5.3-6.2,0-12.1,4.7-17.5,14-5.1,8.7-7.7,17.3-7.7,25.7s.9,6.2,2.6,8.4Z" />
+    <path d="M892.2,399.4l10.4-37.7c.9-3.2,1.4-5.1,1.6-5.8,0-.7.2-1.4.2-2.2,0-1.2-.3-2.1-1-2.8-.7-.7-2-1-3.9-1s-1,0-1.4.1c-.5.1-1,.1-1.6.2v-2c2.6-.4,4.5-.7,5.6-.9,1.1-.2,2.3-.4,3.6-.7l10.8-2.4c.2.2.4.3.5.5l-8.1,26.2c5-7.6,9.2-13.3,12.5-17,5.9-6.5,11.2-9.8,15.9-9.8s3.4.3,4.7,1c2.5,1.3,3.7,3.8,3.7,7.3s0,2-.3,3.1-.5,2.2-.8,3.4l-8,29.2c-.2.6-.3,1.4-.5,2.2s-.3,1.5-.3,1.9c0,.6,0,1.2.4,1.6.3.5.7.7,1.4.7,1,0,2.2-.6,3.5-1.9,1.3-1.2,3.5-3.9,6.5-8l1.8,1.6c-3.3,4.5-5.9,7.7-7.8,9.5-3.3,3.2-6.4,4.8-9.4,4.8s-2.7-.5-3.9-1.4c-1.3-.9-1.9-2.6-1.9-5s0-1.4.2-2.2c0-.8.2-1.4.4-2l7.8-29.7c.4-1.6.7-3,.8-4s.2-1.8.2-2.2c0-1-.2-1.8-.7-2.5s-1.3-1.1-2.5-1.1c-3.1,0-7,2.8-11.7,8.3-2.8,3.3-5.6,7.2-8.4,11.8-2.1,3.5-3.8,7-5,10.3-1.2,3.4-3.2,9.5-5.8,18.3h-9.5v.3Z" />
+  </g>
+</svg></a></div>
+      <span class="hsep" aria-hidden="true"></span>
+      <div class="host"><span class="hl">In partnership with</span><a class="hsg" href="https://iidm.unisg.ch/competence-centres/competence-centre-for-mastering-the-unknown-ccmu/" target="_blank" rel="noopener" aria-label="Competence Centre for Mastering the Unknown, University of St.Gallen"><img class="ccmu-logo" src="ccmu-logo.png" width="1200" height="268" alt="University of St.Gallen, Competence Centre for Mastering the Unknown"></a></div>
+    </div>
+    <div class="base">
+      <div class="links"><a href="https://www.acfr.org.au/" target="_blank" rel="noopener">The Council’s website</a><a href="https://www.instagram.com/acfr.au" target="_blank" rel="noopener">The Council’s Instagram</a></div>
+      <span>© 2026 Australian Council on Foreign Relations</span>
+    </div>
+  </footer>
+</div>
+</div>
+
+
+
+<script>
+(function(){
+
+  /* size the picture band to the first screen */
+  var hb=document.querySelector('.bg'),op=document.querySelector('.open');
+  function fit(){if(hb&&op){var r=op.getBoundingClientRect();hb.style.setProperty('--hero-h',(r.bottom+scrollY)+'px')}}
+  fit();addEventListener('resize',fit);addEventListener('load',fit);
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window && !reduce){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -6% 0px'});els.forEach(function(e){io.observe(e)})}
+  else els.forEach(function(e){e.classList.add('in')});
+  var b=document.getElementById('copyBtn');
+  if(b)b.addEventListener('click',function(){function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'}
+    try{navigator.clipboard.writeText('paxludens@acfr.org.au').then(function(){b.textContent='Copied'},sel)}catch(e){sel()}
+    setTimeout(function(){b.textContent='Copy'},1800)});
+
+})();
+</script>
+
+</body>
+</html>
